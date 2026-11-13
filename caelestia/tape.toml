@@ -1,18 +1,10 @@
 [tape]
 name = "caelestia"
 desc = "A fluid, morphing interface to your Linux desktop"
+dependencies = ["ninja", "Hyprland", "quickshell"]
 
 [hooks]
 insert = ["hyprctl reload", "pkill -x qs", "qs -c caelestia -d"]
 eject = ["hyprctl reload", "pkill -x qs"]
 
-install = [
-  "git clone https://github.com/caelestia-dots/caelestia.git",
-  "mv caelestia/* .",
-  "rm -rf caelestia",
-  "mkdir quickshell",
-  "cd quickshell",
-  "git clone https://github.com/caelestia-dots/shell.git caelestia",
-  "cd caelestia",
-  "cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/ && cmake --build build && sudo cmake --install build" ,
-]
+install = ["chmod +x ./setup.sh", "./setup.sh"]
