@@ -1,2 +1,2 @@
-# Featured-Tapes
-A Hand-picked selection of tapes ( rices, dotfiles etc )
+# Featured Tapes
+A hand-picked selection of tapes ( rices, dotfiles etc )
