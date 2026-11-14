@@ -1,0 +1,10 @@
+[tape]
+name = "Nebula"
+desc = "A Hyprland desktop with a Quickshell shell, Material 3 Expressive shapes and wallpaper-based colors"
+dependencies = ["Hyprland", "quickshell", "matugen", "ninja", "cmake", "qt6-shadertools"]
+
+[hooks]
+insert = ["hyprctl reload", "pkill -x qs", "qs -c nebula -d"]
+eject = ["hyprctl reload", "pkill -x qs"]
+
+install = ["chmod +x ./setup.sh", "./setup.sh"]
