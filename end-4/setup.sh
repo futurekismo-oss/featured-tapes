@@ -2,7 +2,7 @@
 
 set -u
 
-git clone https://github.com/end-4/dots-hyprland end-4
+git clone --recurse-submodules https://github.com/end-4/dots-hyprland end-4
 
 
 mv end-4/dots/.config/* .
