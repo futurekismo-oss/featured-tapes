@@ -1,0 +1,13 @@
+[tape]
+name = "cyberarch"
+desc = "Cyberpunk 2077-style HUD shell for Hyprland (AGS v3 / Astal)"
+dependencies = ["Hyprland", "ags", "quickshell", "yay"]
+
+[hooks]
+insert = [
+    "hyprctl reload",
+    "pkill -x gjs || true",
+    "bash ./scripts/launch-theme & LPID=$!; sleep 2; if ! kill -0 \"$LPID\" 2>/dev/null && ! pgrep -x gjs >/dev/null 2>&1; then echo \"✗ CyberArch HUD failed to start\" >&2; [ -f /tmp/cyberhypr-debug.log ] && cat /tmp/cyberhypr-debug.log >&2; echo \"  install deps: paru -S ags-git libastal-gjs-git libastal-notifd-git libastal-wireplumber-git libastal-mpris-git quickshell\" >&2; echo \"  ensure Hyprland session is active (WAYLAND_DISPLAY set)\" >&2; exit 1; fi; echo \"✓ CyberArch HUD launched (pid $LPID)\"'"
+]
+eject = ["hyprctl reload", "pkill -x gjs || true"]
+install = ["chmod +x ./setup.sh", "./setup.sh"]
