@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for wanting to add your tape! However before we begin you will have to follow a few guidelines to add your dotfiles.
+Thanks for wanting to add your tape! However, before we begin, you will have to follow a few guidelines to add your dotfiles.
 
 ## Structure
 
@@ -16,7 +16,7 @@ Use a lowercase folder name (`end-4`, `serpantinum`). The folder is what gets li
 
 ## tape.toml
 
-example:
+Example:
 ```toml
 [tape]
 name = "caelestia"
@@ -34,30 +34,30 @@ install = ["chmod +x ./setup.sh", "./setup.sh"]
 | --- | --- | --- |
 | `[tape].name` | yes | Name of the tape. |
 | `[tape].desc` | no, but expected | A short description of the tape. |
-| `[tape].dependencies` | no, but expected | What the user needs to install for the tape to work. This will only list the dependencies, the user installs them themselves. |
-| `[hooks].insert` | no, but expected | Shell commands run after the tape is inserted. |
-| `[hooks].eject` | no, but expected | Shell commands run after the tape is ejected. Should undo what `insert` has done. |
+| `[tape].dependencies` | no, but expected | Everything the user needs for the tape to work, including libraries. Tapes detects what dependencies are installed already and lists which aren't installed yet. After that it's up to the user to install the missing dependencies and/or libraries. |
+| `[hooks].insert` | no, but expected | Shell commands that run after the tape is inserted. |
+| `[hooks].eject` | no, but expected | Shell commands that run after the tape is ejected. Should undo what `insert` has done. |
 | `install` | no, but expected if there is a `setup.sh` | Commands run when the tape is installed. Usually runs `setup.sh`. |
 
 Notes:
 
 - Hooks can use `$TAPE_NAME`, `$TAPE_DIR` and `$CONFIG_DIR`.
 - Keep `insert` and `eject` symmetrical: whatever `insert` starts, `eject` stops.
-- List every real dependency, including the compositor.
+- List every real dependency, including the compositor and any libraries.
 
 ## setup.sh rules
 
 `setup.sh` runs on the user's machine, so keep it boring.
 
-- **Everything stays inside the tape's own folder (`~/.tapes/<tape>`).** Do not write, move or delete anything outside it, with one exception: binaries, see below. Do not touch `~/.config` yourself, tapes links the config when the tape is inserted.
+- **Everything stays inside the tape's own folder (`~/.tapes/<tape>`).** Do not write, move or delete anything outside it, with one exception: binaries, see below. Do not touch `~/.config` yourself; tapes links the config when the tape is inserted.
 - **Binaries go in `~/.tapes/bin`.** If your tape ships executables, symlink them into `~/.tapes/bin` (create it with `mkdir -p`). Do not link or move files to `~/.local/bin`, `/usr/local/...` or any other place outside the tape's folder.
 - **No `sudo`** and no system-wide installs. List what is needed in `dependencies` so the user can install it themselves.
 - **No emojis** in the script or its output.
 - Start with `set -u` (or stricter).
-- Pin versions of anything you download: use a tag or release, not `latest` or a branch.
+- Running the script again should update the current dotfiles, so make sure it is safe to run again.
 - Only download from the project's own repositories or releases.
 - Clean up after yourself (temporary clones, the script itself if it is single use). See the other featured tapes for examples.
-- Keep it short. If it needs to do a lot, it is probably too much for a featured tape.
+- Keep it simple. Don't use complex things like loops or commands nested in commands.
 
 `~/.tapes/bin` is not on `PATH` by default, so if your script links binaries there, you could print how to add it at the end (see `serpantinum/setup.sh` for an example).
 
@@ -71,13 +71,13 @@ Add a line to the list in [README.md](README.md), in the same format as the othe
 
 ## AI usage
 
-AI is allowed, but with skepticism. This follows the policy of [tapes](https://github.com/futurekismo-oss/tapes).
+AI is allowed in this repo, as long as the result follows this document. Nobody wants to do all of this by hand, but proper testing is required.
 
 - You must fully understand everything you submit, especially `setup.sh` and the hooks, since they run on other people's machines.
 - You are liable for errors in your contribution.
-- Do not use AI to write READMEs or documentation.
-- Fully agentic commits (an AI committing on its own) are not allowed.
-- Use AI the way you would use Stack Overflow.
+- Test it yourself, see Pull requests below.
+- Please mention if you used AI in your commit or PR, so we know whether AI is to blame or not.
+- If your PR is too vague, it will get rejected. Keep this in mind.
 
 ## Pull requests
 
