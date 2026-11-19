@@ -21,7 +21,11 @@ Example:
 [tape]
 name = "caelestia"
 desc = "A fluid, morphing interface to your Linux desktop"
-dependencies = ["ninja", "Hyprland", "quickshell"]
+dependencies = [
+  "ninja",
+  "Hyprland",
+  "quickshell",
+]
 
 [hooks]
 insert = ["hyprctl reload", "pkill -x qs", "qs -c caelestia -d"]
@@ -34,7 +38,7 @@ install = ["chmod +x ./setup.sh", "./setup.sh"]
 | --- | --- | --- |
 | `[tape].name` | yes | Name of the tape. |
 | `[tape].desc` | no, but expected | A short description of the tape. |
-| `[tape].dependencies` | no, but expected | Everything the user needs for the tape to work, including libraries. Tapes detects what dependencies are installed already and lists which aren't installed yet. After that it's up to the user to install the missing dependencies and/or libraries. |
+| `[tape].dependencies` | no, but expected | Everything the user needs for the tape to work, including libraries. Tapes detects what dependencies are installed already and lists which aren't installed yet. After that it's up to the user to install the missing dependencies and/or libraries. Make sure to format this as a vertical list if the number of items exceed 5. |
 | `[hooks].insert` | no, but expected | Shell commands that run after the tape is inserted. |
 | `[hooks].eject` | no, but expected | Shell commands that run after the tape is ejected. Should undo what `insert` has done. |
 | `install` | no, but expected if there is a `setup.sh` | Commands run when the tape is installed. Usually runs `setup.sh`. |
