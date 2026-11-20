@@ -66,7 +66,7 @@ Notes:
 Add a line to the table in [README.md](README.md), in the same format as the others, in alphabetical order:
 
 ```md
-| **[Name](<repo-link>)** | `tapes install-featured NAME` |
+| **[Name](<link-to-dotfiles-repo>)** | `tapes install-featured NAME` |
 ```
 
 ## AI usage
