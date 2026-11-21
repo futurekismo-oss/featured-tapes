@@ -9,7 +9,8 @@ Every tape has its own folder with the following files:
 ```
 <tape-name>/
 ├── tape.toml    # required, contains the tape description, and its hooks
-└── setup.sh     # optional but recommended, use it if the tape needs to fetch or build something before it can work
+├── setup.sh     # optional but recommended, use it if the tape needs to fetch or build something before it can work
+└── default.nix  # optional, declarative NixOS/Home Manager package definition
 ```
 
 Use a lowercase folder name (`end-4`, `serpantinum`). The folder is what gets linked in the README.
@@ -64,6 +65,12 @@ Notes:
 - Keep it simple. Don't use complex things like loops or commands nested in commands.
 
 `~/.tapes/bin` is not on `PATH` by default, so if your script links binaries there, you could print how to add it at the end (see `serpantinum/setup.sh` for an example).
+
+## Nix support (`default.nix`)
+
+Adding a `default.nix` (and registering the tape in the root `flake.nix`) is **optional** for new featured tape PRs. Contributors do not need to know Nix—a standard PR with `tape.toml` and `setup.sh` is enough, and Nix maintainers can add `<tape-name>/default.nix` in a follow-up PR.
+
+If you do want to include Nix support in your PR, follow one of the existing `<tape-name>/default.nix` files and make sure `nix flake check --no-build` passes.
 
 ## Adding the tape to the README
 
